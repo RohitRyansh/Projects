@@ -21,13 +21,6 @@ class Lead extends Model
         return $this->status ? self::ACTIVE : self::INACTIVE;
     }
 
-    protected function isStatusActive(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value ? self::ACTIVE : self::INACTIVE,
-        );
-    }
-
     public function scopeStatus($query, $tab)
     {
         $query->when($tab ?? false, function ($query, $tab) {

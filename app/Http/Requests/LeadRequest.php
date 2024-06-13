@@ -27,4 +27,11 @@ class LeadRequest extends FormRequest
             'status' => 'required'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Lead name is required',
+        ];
+    }
 }

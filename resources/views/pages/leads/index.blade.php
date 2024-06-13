@@ -20,31 +20,31 @@
                         {{ __('In Active Leads') }}
                     </x-nav-link>
                 </div>
-                <div class="flex">
-                    @foreach($types as $key => $type)
+                <div class="flex gap-4">
+                    @foreach($webTypes as $webType)
                         <table class="w-full text-left text-sm text-slate-700 dark:text-slate-300" style="border: 1px solid black">
                             <thead class="border-b border-slate-300 bg-slate-100 text-sm text-black dark:border-slate-700 dark:bg-slate-800 dark:text-white">
                                 <tr>
-                                    <th scope="col" class="p-4 text-center">{{ $type }}</th>
+                                    <th scope="col" class="p-4 text-center">{{ $webType->name }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
-                                <tr>
-                                    <th class="p-4">
-                                        {{ __('Name') }}
-                                    </th>
-                                    <th class="p-4">
-                                        {{ __('Status') }}
-                                    </th>
-                                </tr>
-                                @foreach($leads as $lead)
-                                    @if ($lead->web_type_id == $key)
+                                @if ($webType->leads->count() > 0)
+                                    <tr>
+                                        <th class="p-4">
+                                            {{ __('Name') }}
+                                        </th>
+                                        <th class="p-4">
+                                            {{ __('Status') }}
+                                        </th>
+                                    </tr>
+                                    @foreach($webType->leads as $lead)
                                         <tr>
                                             <td class="p-4">
                                                 {{ $lead->name }}
                                             </td>
                                             <td class="p-4">
-                                                {{ $lead->isStatusActive }}
+                                                {{ $lead->leadStatus}}
                                             </td>
                                             <td>
                                                 <a href="{{route('leads.edit', [$lead ,'tab' => request()->tab])}}">Edit</a>
@@ -57,8 +57,8 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endif
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     @endforeach

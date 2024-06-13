@@ -11,12 +11,13 @@ class LeadController extends Controller
 {
     public function index()
     {
-        $leads = Lead::where('user_id', Auth::id())
-            ->status(request()->tab)
-            ->get();
-        $types = WebType::ALL_TYPES;
+        $webTypes = WebType::with(['leads' => function ($query) {
+            $query->where('user_id', Auth::id())
+                  ->status(request()->tab);
+        }])
+        ->get();
 
-        return view('pages.leads.index', compact('leads', 'types'));
+        return view('pages.leads.index', compact('webTypes'));
     }
 
     public function create()
