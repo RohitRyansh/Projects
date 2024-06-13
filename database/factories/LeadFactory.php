@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\WebType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class LeadFactory extends Factory
         return [
             'user_id' => User::factory(),
             'name' => fake()->name(),
-            'type' => fake()->randomElement(['WEB', 'MOBILE', 'AUTO', 'EMBEDDED']),
+            'web_type_id' => fake()->randomElement(WebType::pluck('id')->toArray()),
         ];
     }
 }

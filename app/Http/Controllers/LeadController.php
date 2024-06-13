@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
-use Illuminate\Http\Request;
+use App\Models\WebType;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class LeadController extends Controller
 {
@@ -14,33 +14,21 @@ class LeadController extends Controller
         $leads = Lead::where('user_id', Auth::id())
             ->status(request()->tab)
             ->get();
-        $types = Lead::TYPES;
+        $types = WebType::ALL_TYPES;
 
         return view('pages.leads.index', compact('leads', 'types'));
     }
 
     public function create()
     {
-        $types = Lead::TYPES;
+        $types = WebType::ALL_TYPES;
 
         return view('pages.leads.create', compact('types'));
     }
 
-    public function store(Request $request)
+    public function store(LeadRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'type' => 'required',
-            'status' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $validated = $validator->validated();
+        $validated = $request->validated();
 
         $validated['user_id'] = Auth::id();
 
@@ -53,27 +41,14 @@ class LeadController extends Controller
 
     public function edit(Lead $lead)
     {
-        $types = Lead::TYPES;
+        $types = WebType::ALL_TYPES;
 
         return view('pages.leads.edit', compact('lead', 'types'));
     }
 
-    public function update(Request $request, Lead $lead)
+    public function update(LeadRequest $request, Lead $lead)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'type' => 'required',
-            'status' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $validated = $validator->validated();
-
+        $validated = $request->validated();
 
         $lead->update($validated);
 

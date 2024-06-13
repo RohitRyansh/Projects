@@ -12,24 +12,16 @@ class Lead extends Model
 
     protected $guarded = [];
 
-    CONST TYPES = [
-        'WEB',
-        'MOBILE',
-        'AUTO',
-        'EMBEDDED'
-    ];
-
     CONST ACTIVE = 'Active';
 
     CONST INACTIVE = 'In Active';
-
 
     public function getLeadStatusAttribute()
     {
         return $this->status ? self::ACTIVE : self::INACTIVE;
     }
 
-    protected function status(): Attribute
+    protected function isStatusActive(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? self::ACTIVE : self::INACTIVE,

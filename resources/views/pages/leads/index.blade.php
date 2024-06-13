@@ -21,7 +21,7 @@
                     </x-nav-link>
                 </div>
                 <div class="flex">
-                    @foreach($types as $type)
+                    @foreach($types as $key => $type)
                         <table class="w-full text-left text-sm text-slate-700 dark:text-slate-300" style="border: 1px solid black">
                             <thead class="border-b border-slate-300 bg-slate-100 text-sm text-black dark:border-slate-700 dark:bg-slate-800 dark:text-white">
                                 <tr>
@@ -38,13 +38,13 @@
                                     </th>
                                 </tr>
                                 @foreach($leads as $lead)
-                                    @if ($lead->type == $type)
+                                    @if ($lead->web_type_id == $key)
                                         <tr>
                                             <td class="p-4">
                                                 {{ $lead->name }}
                                             </td>
                                             <td class="p-4">
-                                                {{ $lead->status }}
+                                                {{ $lead->isStatusActive }}
                                             </td>
                                             <td>
                                                 <a href="{{route('leads.edit', [$lead ,'tab' => request()->tab])}}">Edit</a>

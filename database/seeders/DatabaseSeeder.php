@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            WebTypeSeeder::class,
+        ]);
+
         User::factory(1000)->hasLeads(1)->create();
     }
 }
