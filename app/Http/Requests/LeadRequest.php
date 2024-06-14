@@ -22,16 +22,9 @@ class LeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'query' => 'required',
             'web_type_id' => 'required',
             'status' => 'required'
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'Lead name is required',
         ];
     }
 }

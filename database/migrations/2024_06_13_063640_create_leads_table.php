@@ -15,9 +15,8 @@ return new class extends Migration
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('name')->nullable();
-            $table->string('query')->nullable();
             $table->foreignId('web_type_id')->constrained();
+            $table->longText('query')->nullable();
             $table->boolean('status')->comment('0 => INACTIVE, 1 => ACTIVE')->default(true);
             $table->timestamps();
         });

@@ -20,8 +20,8 @@ class LeadFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'name' => fake()->name(),
-            'web_type_id' => fake()->randomElement(WebType::pluck('id')->toArray()),
+            'query' => fake()->name(),
+            'web_type_id' => fake()->randomElement(array_keys(WebType::ALL_TYPES)),
         ];
     }
 }

@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/leads', 'index')->name('leads');
         Route::get('/leads/create', 'create')->name('leads.create');
         Route::post('/leads/store', 'store')->name('leads.store');
+        Route::get('/leads/{lead}/show', 'show')->name('leads.show');
         Route::get('/leads/{lead}/edit', 'edit')->name('leads.edit');
         Route::put('/leads/{lead}/update', 'update')->name('leads.update');
         Route::delete('/leads/{lead}/delete', 'delete')->name('leads.delete');

@@ -3,15 +3,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden w-full overflow-x-auto rounded-xl border border-slate-300 dark:border-slate-700">
                 <div class="p-6 flex">
+                    <h2 class="font-medium">
+                        {{__('Add Lead')}}
+                    </h2>
                     <form action="{{route('leads.store',['tab' => request()->tab])}}" class="mt-6 space-y-6" method="post">
                         @csrf
-                        <div class="flex w-full max-w-xs flex-col gap-1 text-slate-700 dark:text-slate-300">
-                            <label for="textInputDefault" class="w-fit pl-0.5 text-sm">Lead Name</label>
-                            <input id="textInputDefault" type="text" class="w-full rounded-xl border border-slate-300 bg-slate-100 px-2 py-2.5 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-75 dark:border-slate-700 dark:bg-slate-800/50 dark:focus-visible:outline-blue-600" name="name" placeholder="Enter your lead name" autocomplete="name"/>
-                            @error('name')
-                                <div class="alert alert-danger text-red-500">{{ $message }}</div>
-                            @enderror
+                        <div class="flex w-full max-w-md flex-col gap-1 text-slate-700 dark:text-slate-300">
+                            <label for="textArea" class="w-fit pl-0.5 text-sm">Query</label>
+                            <textarea id="textArea" class="w-full rounded-xl border border-slate-300 bg-slate-100 px-2.5 py-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-75 dark:border-slate-700 dark:bg-slate-800/50 dark:focus-visible:outline-blue-600" rows="3" placeholder="Enter your query..." name="query" required></textarea>
                         </div>
+                        @error('query')
+                            <div class="alert alert-danger text-red-500">{{ $message }}</div>
+                        @enderror
+
                         <div class="relative flex w-full max-w-xs flex-col gap-1 text-slate-700 dark:text-slate-300">
                             <label  class="w-fit pl-0.5 text-sm">Lead Types</label>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="absolute pointer-events-none right-4 top-8 h-5 w-5">

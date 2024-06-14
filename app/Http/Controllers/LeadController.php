@@ -40,6 +40,11 @@ class LeadController extends Controller
         return to_route('leads', ['tab' => $request->tab]);
     }
 
+    public function show(Lead $lead)
+    {
+        return view('pages.leads.show', compact('lead'));
+    }
+
     public function edit(Lead $lead)
     {
         $types = WebType::ALL_TYPES;
